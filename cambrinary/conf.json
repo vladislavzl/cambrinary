@@ -6,6 +6,12 @@
       "second for foreground",
       "third for background"
     ],
+    "level": [
+      "default",
+      "red",
+      "default"
+    ],
+
     "pron_region": [
       "default",
       "blue",

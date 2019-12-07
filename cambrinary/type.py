@@ -1,4 +1,4 @@
-from .Conf import *
+from Conf import *
 
 
 class Pron(object):
@@ -29,16 +29,19 @@ class Pronunciation(object):
 
 
 class PadIndent(object):
-    def __init__(self, definition=None, trans=None, examps=None, synonym=None):
+    def __init__(self, definition=None, trans=None, examps=None, synonym=None, level=None):
         self.definition = definition
         self.trans = trans
         self.examps = examps
         self.synonym = synonym
+        self.level = level
 
     def to_str(self):
         res = ''
+        if self.level:
+            res += colors.level('--' + self.level + '--' + '\n')
         if self.definition:
-            res += colors.definition('* ' + self.definition) + '\n'
+            res += colors.definition('* ' + self.definition) + '\n\n'
         if self.trans:
             res += colors.trans_def('  {}\n'.format(self.trans))
         if self.examps:
