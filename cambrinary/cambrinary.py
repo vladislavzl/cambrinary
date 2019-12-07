@@ -6,9 +6,9 @@ from argparse import RawTextHelpFormatter
 import aiohttp
 from bs4 import BeautifulSoup
 
-from .country_const import *
-from .log import *
-from .type import *
+from country_const import *
+from log import *
+from type import *
 
 translation = {GB: 'english',
                CN: 'english-chinese-traditional',
@@ -171,8 +171,10 @@ def parse_pad_indents(block, args):
 
     def get_level(p):
         d = p.find('span', attrs={'class': 'def-info ddef-info'})
-        l = d.find_all()[0]
-        return l.get_text() if l else None
+        for l in d.find_all('span'):
+            if 'epp-xref' in l['class']:
+                return l.get_text()
+        return None
 
     def get_trans(body):
         trans = body.find('span', attrs={'class': 'trans dtrans dtrans-se'}, recursive=False)
